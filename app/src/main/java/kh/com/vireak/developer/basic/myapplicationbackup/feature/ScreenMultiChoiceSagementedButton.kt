@@ -3,7 +3,6 @@ package kh.com.vireak.developer.basic.myapplicationbackup.feature
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -16,18 +15,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MultiChoiceSegmentedButtonRow
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SegmentedButton
-import androidx.compose.material3.SegmentedButtonDefaults
-import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -38,17 +31,16 @@ import kh.com.vireak.developer.basic.myapplicationbackup.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-
-fun ScreenMultiChoiceSegmentedButton(){
+fun ScreenMultiChoiceSegmentedButton(onBack: () -> Unit = {}) {
     val selectedOption = remember { mutableStateListOf(false, false, false) }
-    val options = listOf("Day", "Month", "Year" )
+    val options = listOf("Day", "Month", "Year")
 
     Scaffold(
         topBar = {
             TopAppBar(
                 navigationIcon = {
                     IconButton(
-                        onClick = {}
+                        onClick = onBack
                     ) {
                         Icon(
                             painter = painterResource(R.drawable.ic_backward_arrow),
@@ -90,7 +82,7 @@ fun ScreenMultiChoiceSegmentedButton(){
 
             )
         },
-    ){padding ->
+    ) { padding ->
         Column(
             modifier = Modifier
                 .padding(padding),
@@ -98,10 +90,9 @@ fun ScreenMultiChoiceSegmentedButton(){
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             MultiChoiceSegmentedButtonRow(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-//                .padding(start = 100.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
             ) {
                 options.forEachIndexed { index, value ->
                     SegmentedButton(
@@ -112,14 +103,10 @@ fun ScreenMultiChoiceSegmentedButton(){
                         checked = selectedOption[index],
                         shape = RoundedCornerShape(16.dp),
                         onCheckedChange = { isChecked ->
-                            println(selectedOption)
-                            println(isChecked)
                             selectedOption[index] = isChecked
-                            println(selectedOption)
-
                         },
                         label = {
-                            when(value){
+                            when (value) {
                                 "Day" ->
                                     Icon(
                                         painter = painterResource(R.drawable.ic_pflogo),
@@ -138,9 +125,6 @@ fun ScreenMultiChoiceSegmentedButton(){
                                     )
                             }
                         }
-
-
-
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                 }
@@ -152,6 +136,6 @@ fun ScreenMultiChoiceSegmentedButton(){
 
 @Preview(showBackground = false)
 @Composable
-fun ScreenMultiChoiceSegmentedButtonPreview(){
+fun ScreenMultiChoiceSegmentedButtonPreview() {
     ScreenMultiChoiceSegmentedButton()
 }

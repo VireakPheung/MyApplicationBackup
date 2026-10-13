@@ -1,12 +1,10 @@
 package kh.com.vireak.developer.basic.myapplicationbackup.feature
 
-import android.R.attr.id
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -19,15 +17,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,7 +31,7 @@ import kh.com.vireak.developer.basic.myapplicationbackup.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScreenRadioButton(){
+fun ScreenRadioButton(onBack: () -> Unit = {}){
     val sizeList = listOf(
         SizeModel(id = Size.SMALL, label = "Small"),
         SizeModel(id = Size.MEDIUM, label = "Medium"),
@@ -60,8 +55,7 @@ fun ScreenRadioButton(){
             TopAppBar(
                 navigationIcon = {
                     IconButton(
-                        onClick = {
-                        }
+                        onClick = onBack
                     ) {
                         Icon(
                             painter = painterResource(R.drawable.ic_backward_arrow),

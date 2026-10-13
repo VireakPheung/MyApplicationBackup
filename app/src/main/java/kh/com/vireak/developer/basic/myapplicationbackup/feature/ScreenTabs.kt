@@ -35,7 +35,7 @@ import kh.com.vireak.developer.basic.myapplicationbackup.project.PromotionScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScreenTabs(){
+fun ScreenTabs(onBack: () -> Unit = {}){
     val tabList = listOf<TabModel>(
         TabModel(label = "Overview", icon = R.drawable.ic_menu),
         TabModel(label = "Specifications", icon = R.drawable.ic_menu)
@@ -43,16 +43,12 @@ fun ScreenTabs(){
 
     var selectedTabIndex by rememberSaveable{ mutableIntStateOf(0)} //rememberSaveable automatic reset to index 0
 
-
-
-
     Scaffold(
         topBar = {
             TopAppBar(
                 navigationIcon = {
                     IconButton(
-                        onClick = {
-                        }
+                        onClick = onBack
                     ) {
                         Icon(
                             painter = painterResource(R.drawable.ic_backward_arrow),
@@ -88,18 +84,10 @@ fun ScreenTabs(){
                             contentDescription = ""
                         )
                     }
-
-
                 }
-
             )
-
         },
-
-
     ){padding ->
-
-
         Column(
             modifier = Modifier
                 .padding(padding)
@@ -148,9 +136,6 @@ fun ScreenTabs(){
                 }
             }
         }
-
-
-
     }
 }
 
@@ -158,8 +143,6 @@ data class TabModel(
     val label: String,
     @DrawableRes val icon: Int
 )
-
-
 
 @Preview(showBackground = false)
 @Composable

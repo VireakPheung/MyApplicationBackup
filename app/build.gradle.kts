@@ -17,7 +17,7 @@ android {
 
     defaultConfig {
         applicationId = "kh.com.vireak.developer.basic.myapplicationbackup"
-        minSdk = 29
+        minSdk = 26
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -54,6 +54,7 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.camera.core)
     implementation(libs.androidx.compose.runtime)
+//    implementation(libs.firebase.firestore.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -67,4 +68,25 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.navigation3)
     implementation(libs.androidx.material3.adaptive.navigation3)
     implementation(libs.kotlinx.serialization.core)
+
+    //kotlinx serialization
+    implementation(libs.kotlinx.serialization)
+
+
+
+    //image loader
+    implementation("io.coil-kt:coil-compose:2.5.0")
+
+
+    //Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    //OkHttp Logging Interceptor (optional but great for debugging)
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.3")
+
+
 }

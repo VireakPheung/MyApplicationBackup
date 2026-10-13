@@ -18,19 +18,23 @@ import kh.com.vireak.developer.basic.myapplicationbackup.card.ScreenCard
 import kh.com.vireak.developer.basic.myapplicationbackup.home2.HomeScreen
 import kh.com.vireak.developer.basic.myapplicationbackup.navigation_key.TestNavKey
 import kh.com.vireak.developer.basic.myapplicationbackup.profile.ProfileScreen
+import kh.com.vireak.developer.basic.myapplicationbackup.feature.*
+import kh.com.vireak.developer.basic.myapplicationbackup.feature.notificationpermission.NotificationPermissionScreen
+import kh.com.vireak.developer.basic.myapplicationbackup.feature.userApi.ScreenUserApi
 
 @Composable
 fun TestApp() {
     val backStack = remember { mutableStateListOf<TestNavKey>(TestNavKey.Home) }
+    val onBack = {
+        if (backStack.size > 1) {
+            backStack.removeLastOrNull()
+        }
+    }
 
     Box(modifier = Modifier.fillMaxSize()) {
         NavDisplay(
             backStack = backStack,
-            onBack = {
-                if (backStack.size > 1) {
-                    backStack.removeLastOrNull()
-                }
-            },
+            onBack = onBack,
             transitionSpec = {
                 slideInHorizontally(
                     animationSpec = tween(300),
@@ -57,24 +61,10 @@ fun TestApp() {
                         )
                     }
                     TestNavKey.Card -> NavEntry(key) {
-                        ScreenCard(
-                            onBack = {
-                                if (backStack.size > 1) {
-                                    backStack.removeLastOrNull()
-                                }
-                            }
-                        )
+                        ScreenCard(onBack = onBack)
                     }
                     TestNavKey.Profile -> NavEntry(key) {
-                        ProfileScreen(
-                            userId = 1,
-                            onBack = {
-
-                                if (backStack.size > 1) {
-                                    backStack.removeLastOrNull()
-                                }
-                            }
-                        )
+                        ProfileScreen(userId = 1, onBack = onBack)
                     }
                     TestNavKey.UserList -> NavEntry(key) {
                         UserListScreen(
@@ -82,17 +72,26 @@ fun TestApp() {
                         )
                     }
                     is TestNavKey.UserProfile -> NavEntry(key) {
-                        ProfileScreen(
-                            userId = key.userId,
-                            onBack = {
-                                if (backStack.size > 1) {
-                                    backStack.removeLastOrNull()
-                                }
-                            }
-                        )
+                        ProfileScreen(userId = key.userId, onBack = onBack)
                     }
-
-
+                    TestNavKey.Chip -> NavEntry(key) { ScreenChip(onBack = onBack) }
+                    TestNavKey.Tabs -> NavEntry(key) { ScreenTabs(onBack = onBack) }
+                    TestNavKey.Slider -> NavEntry(key) { ScreenSlider(onBack = onBack) }
+                    TestNavKey.CheckBox -> NavEntry(key) { ScreenCheckedBox(onBack = onBack) }
+                    TestNavKey.SnackBar -> NavEntry(key) { ScreenSnackBar(onBack = onBack) }
+                    TestNavKey.DatePicker -> NavEntry(key) { ScreenDatePicker(onDismiss = onBack) }
+                    TestNavKey.AlertDialog -> NavEntry(key) { ScreenAlertDialog(onBack = onBack) }
+                    TestNavKey.BottomSheet -> NavEntry(key) { ScreenBottomSheet(onBack = onBack) }
+                    TestNavKey.RadioButton -> NavEntry(key) { ScreenRadioButton(onBack = onBack) }
+                    TestNavKey.FilledIconButton -> NavEntry(key) { FilledIconButton(onBack = onBack) }
+                    TestNavKey.NavigationBar -> NavEntry(key) { ScreenNavigationBar(onBack = onBack) }
+                    TestNavKey.NavigationDrawer -> NavEntry(key) { ScreenNavigationDrawer(onBack = onBack) }
+                    TestNavKey.LoadingAndProgress -> NavEntry(key) { ScreenLoadingAndProgress(onBack = onBack) }
+                    TestNavKey.MultiChoiceSegmentedButton -> NavEntry(key) { ScreenMultiChoiceSegmentedButton(onBack = onBack) }
+                    TestNavKey.SingleChoiceSegmentedButton -> NavEntry(key) { ScreenSingleChoiceSegmentedButton(onBack = onBack) }
+                    TestNavKey.HorizontalMultiBrowseCarousel -> NavEntry(key) { ScreenHorizontalMultiBrowseCarousel(onBack = onBack) }
+                    TestNavKey.NotificationPermission -> NavEntry(key) { NotificationPermissionScreen(onBack = onBack)}
+                    TestNavKey.UserApi -> NavEntry(key) { ScreenUserApi(onBack = onBack)}
                 }
             }
         )

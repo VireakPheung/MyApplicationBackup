@@ -1,6 +1,6 @@
-import android.R.attr.enabled
+package kh.com.vireak.developer.basic.myapplicationbackup.feature
+
 import android.util.Log
-import android.widget.Space
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
@@ -28,7 +27,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -37,7 +35,7 @@ import kh.com.vireak.developer.basic.myapplicationbackup.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScreenChip(
-//    onDismiss: () -> Unit
+    onBack: () -> Unit = {}
 ){
     var selected by remember { mutableStateOf(false) }
     var enable by remember { mutableStateOf(true) }
@@ -48,7 +46,7 @@ fun ScreenChip(
             TopAppBar(
                 navigationIcon = {
                     IconButton(
-                        onClick = {}
+                        onClick = onBack
                     ) {
                         Icon(
                             painter = painterResource(R.drawable.ic_backward_arrow),
@@ -63,7 +61,7 @@ fun ScreenChip(
                 ),
                 title = {
                     Text(
-                        text = "Screen Check Box"
+                        text = "Screen Chip"
                     )
                 },
                 actions = {
@@ -94,7 +92,7 @@ fun ScreenChip(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(),
+                .padding(padding),
             verticalArrangement = Arrangement.Center
         ) {
             Row (
@@ -142,7 +140,6 @@ fun ScreenChip(
                 if(enable){
                         InputChip(
                             onClick = {
-//                                onDismiss()
                                 enable = !enable
                             },
                             selected = enable,
@@ -172,6 +169,6 @@ fun ScreenChip(
 @Composable
 fun ScreenChipPreview(){
     ScreenChip(
-//        onDismiss = {}
+        onBack = {}
     )
 }

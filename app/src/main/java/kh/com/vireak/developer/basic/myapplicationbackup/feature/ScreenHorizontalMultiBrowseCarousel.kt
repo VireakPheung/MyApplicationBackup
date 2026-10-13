@@ -1,22 +1,11 @@
 package kh.com.vireak.developer.basic.myapplicationbackup.feature
 
-import android.content.ClipData
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -25,32 +14,19 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
-import androidx.compose.material3.carousel.CarouselState
 import androidx.compose.material3.carousel.HorizontalMultiBrowseCarousel
 import androidx.compose.material3.carousel.rememberCarouselState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import kh.com.vireak.developer.basic.myapplicationbackup.R
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-
-fun ScreenHorizontalMultiBrowseCarousel(){
+fun ScreenHorizontalMultiBrowseCarousel(onBack: () -> Unit = {}){
     data class ItemModel(
         val id: Int,
         val title: String,
@@ -91,7 +67,7 @@ fun ScreenHorizontalMultiBrowseCarousel(){
     )
     val carouselState = rememberCarouselState(
         initialItem = 1,
-        itemCount = {10}
+        itemCount = { listItem.size }
     )
 
     Scaffold(
@@ -99,7 +75,7 @@ fun ScreenHorizontalMultiBrowseCarousel(){
             TopAppBar(
                 navigationIcon = {
                     IconButton(
-                        onClick = {}
+                        onClick = onBack
                     ) {
                         Icon(
                             painter = painterResource(R.drawable.ic_backward_arrow),
@@ -114,7 +90,7 @@ fun ScreenHorizontalMultiBrowseCarousel(){
                 ),
                 title = {
                     Text(
-                        text = "ScreenHorizontalMultiBrowseCarousel"
+                        text = "Carousel"
                     )
                 },
                 actions = {
@@ -161,11 +137,7 @@ fun ScreenHorizontalMultiBrowseCarousel(){
                     contentDescription = card.title
                 )
             }
-
-
-
         }
-
     }
 }
 
@@ -174,5 +146,3 @@ fun ScreenHorizontalMultiBrowseCarousel(){
 fun ScreenHorizontalMultiBrowseCarouselPreview(){
     ScreenHorizontalMultiBrowseCarousel()
 }
-
-

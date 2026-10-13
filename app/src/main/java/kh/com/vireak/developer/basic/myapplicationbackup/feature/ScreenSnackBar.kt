@@ -24,7 +24,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,15 +33,10 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScreenSnackBar(){
+fun ScreenSnackBar(onBack: () -> Unit = {}){
     val context = LocalContext.current
-//    context is just like a bridge for communication between android studio to OS of android, like when we want to open a camera we need a context to request to OS
     val coroutineScope = rememberCoroutineScope()
     val snackbarHostState = remember{ SnackbarHostState() }
-
-    LaunchedEffect(Unit) {
-//        snackbarHostState.showSnackbar("Snack Bar Message Here")
-    }
 
     Scaffold(
         snackbarHost = {
@@ -52,8 +46,7 @@ fun ScreenSnackBar(){
             TopAppBar(
                 navigationIcon = {
                     IconButton(
-                        onClick = {
-                        }
+                        onClick = onBack
                     ) {
                         Icon(
                             painter = painterResource(R.drawable.ic_backward_arrow),
@@ -121,12 +114,8 @@ fun ScreenSnackBar(){
                         when (result) {
                             SnackbarResult.ActionPerformed -> {
                                 Toast.makeText(context, "Toast Message", Toast.LENGTH_SHORT).show()
-//                                /* Handle snackbar action performed */ like if you want to roll back your data
                             }
                             SnackbarResult.Dismissed -> {
-                                /* Handle snackbar dismissed */
-
-
                             }
 
                             else -> {}

@@ -2,7 +2,6 @@ package kh.com.vireak.developer.basic.myapplicationbackup.feature
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -21,7 +20,6 @@ import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -33,8 +31,7 @@ import kh.com.vireak.developer.basic.myapplicationbackup.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-
-fun ScreenSingleChoiceSegmentedButton(){
+fun ScreenSingleChoiceSegmentedButton(onBack: () -> Unit = {}){
     var selectedIndex by remember{ mutableIntStateOf(0) }
     val options = listOf("Day", "Month", "Year" )
 
@@ -43,7 +40,7 @@ fun ScreenSingleChoiceSegmentedButton(){
             TopAppBar(
                 navigationIcon = {
                     IconButton(
-                        onClick = {}
+                        onClick = onBack
                     ) {
                         Icon(
                             painter = painterResource(R.drawable.ic_backward_arrow),

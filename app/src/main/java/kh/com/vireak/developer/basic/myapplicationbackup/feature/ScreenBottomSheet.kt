@@ -36,7 +36,7 @@ import kh.com.vireak.developer.basic.myapplicationbackup.card.ScreenCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScreenBottomSheet(){
+fun ScreenBottomSheet(onBack: () -> Unit = {}){
     var showBottomSheet by remember{mutableStateOf(false)}
     var showRecipt by remember { mutableStateOf(false)}
     val sizeList = listOf(
@@ -63,7 +63,11 @@ fun ScreenBottomSheet(){
                 navigationIcon = {
                     IconButton(
                         onClick = {
-                            showRecipt = false
+                            if (showRecipt) {
+                                showRecipt = false
+                            } else {
+                                onBack()
+                            }
                         }
                     ) {
                         Icon(
@@ -79,7 +83,7 @@ fun ScreenBottomSheet(){
                 ),
                 title = {
                     Text(
-                        text = "Botton Sheet"
+                        text = "Bottom Sheet"
                     )
                 },
                 actions = {
@@ -264,9 +268,6 @@ fun ReciptSection(size: SizeModel, sugar: SugarModel){
         }
     }
 }
-
-
-
 
 @Preview(showBackground = false)
 @Composable
